@@ -27,6 +27,7 @@ pipeline{
         if(env.BRANCH_NAME != 'master'){
           bat 'docker rm -f myflaskapp_c'
           bat 'docker rmi -f myflaskapp'
+        }
       }
     }
   }

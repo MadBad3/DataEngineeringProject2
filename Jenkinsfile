@@ -13,20 +13,24 @@ pipeline{
     }
     stage('Testing'){
       steps{
-        if(env.BRANCH_NAME == 'web_interface'){
+        scripts{
+          if(env.BRANCH_NAME == 'web_interface'){
           bat 'python test_app.py'
-        }else if(env.BRANCH_NAME == 'develop'){
-          echo "test of develop branch"
-        }else if(env.BRANCH_NAME == 'release'){
-          input "proceed with deployment to live?"
+          }else if(env.BRANCH_NAME == 'develop'){
+            echo "test of develop branch"
+          }else if(env.BRANCH_NAME == 'release'){
+            input "proceed with deployment to live?"
+          }
         }
       }
     }
     stage('Docker images down'){
       steps{
-        if(env.BRANCH_NAME != 'master'){
-          bat 'docker rm -f myflaskapp_c'
-          bat 'docker rmi -f myflaskapp'
+        scripts{
+          if(env.BRANCH_NAME != 'master'){
+            bat 'docker rm -f myflaskapp_c'
+            bat 'docker rmi -f myflaskapp'
+          }
         }
       }
     }

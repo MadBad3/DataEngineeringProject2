@@ -15,7 +15,7 @@ pipeline{
       steps{
         script{
           if(env.BRANCH_NAME == 'web_interface'){
-            bat 'python unittest.py'
+            bat 'python unit_tests.py'
           }else if(env.BRANCH_NAME == 'develop'){
             echo "test of develop branch"
           }else if(env.BRANCH_NAME == 'release'){

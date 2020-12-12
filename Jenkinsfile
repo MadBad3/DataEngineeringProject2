@@ -13,7 +13,7 @@ pipeline{
     }
     stage('Testing'){
       steps{
-        scripts{
+        script{
           if(env.BRANCH_NAME == 'web_interface'){
             bat 'python test_app.py'
           }else if(env.BRANCH_NAME == 'develop'){
@@ -26,7 +26,7 @@ pipeline{
     }
     stage('Docker images down'){
       steps{
-        scripts{
+        script{
           if(env.BRANCH_NAME != 'master'){
             bat 'docker rm -f myflaskapp_c'
             bat 'docker rmi -f myflaskapp'
@@ -36,7 +36,3 @@ pipeline{
     }
   }
 }
-
-
-
-

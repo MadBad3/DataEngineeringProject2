@@ -17,9 +17,11 @@ pipeline{
           if(env.BRANCH_NAME == 'web_interface'){
             echo "We are in feature branch, will run unit tests !"
 	    bat 'python unit_tests.py'
+	    echo "Going to proceed with push into develop branch !"
           }else if(env.BRANCH_NAME == 'develop'){
 	    echo "We are in develop branch, will run stress tests !"
-	    bat 'pythom stress_tests.py'
+	    bat 'python stress_tests.py'
+	    echo "Going to proceed to push into release branch !"
           }else if(env.BRANCH_NAME == 'release'){
             echo "We are in release branch !"
 	    input "proceed with deployment to live ?"

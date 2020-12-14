@@ -9,7 +9,7 @@ pipeline {
           }
         }
 
-        stage('Testing 3') {
+        stage('Testing') {
           steps {
             sleep 75
             script {
@@ -47,5 +47,3 @@ pipeline {
 
   }
 }
-
-

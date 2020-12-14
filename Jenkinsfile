@@ -1,40 +1,49 @@
-pipeline{
+pipeline {
   agent any
   stages {
-    stage('Build and Running Flask app'){
-      steps{
-        bat 'docker-compose up'
-      }
-    }
-    stage('Testing'){
-      steps{
-        script{
-          if(env.BRANCH_NAME != 'master' && env.BRANCH_NAME != 'release' && env.BRANCH_NAME != 'develop'){
-            echo "We are in feature branch, will run unit tests !"
-	    bat 'python unit_tests.py'
-	    echo "Going to proceed with push into develop branch !"
-          }else if(env.BRANCH_NAME == 'develop'){
-	    echo "We are in develop branch, will run stress tests !"
-	    bat 'python stress_tests.py'
-	    echo "Going to proceed to push into release branch !"
-          }else if(env.BRANCH_NAME == 'release'){
-            echo "We are in release branch !"
-	    input "proceed with deployment to live ?"
+    stage('Build and Running Flask app') {
+      parallel {
+        stage('Build and Running Flask app') {
+          steps {
+            bat 'docker-compose up'
           }
         }
-      }
-    }
-    stage('Docker images down'){
-      steps{
-        script{
-          if(env.BRANCH_NAME != 'master'){
-            bat 'docker rm -f myflaskapp_c'
-            bat 'docker rmi -f myflaskapp'
+
+        stage('Testing 3') {
+          steps {
+            sleep 75
+            script {
+              if(env.BRANCH_NAME != 'master' && env.BRANCH_NAME != 'release' && env.BRANCH_NAME != 'develop'){
+                echo "We are in feature branch, will run unit tests !"
+                bat 'python unit_tests.py'
+                echo "Going to proceed with push into develop branch !"
+              }else if(env.BRANCH_NAME == 'develop'){
+                echo "We are in develop branch, will run stress tests !"
+                bat 'python stress_tests.py'
+                echo "Going to proceed to push into release branch !"
+              }else if(env.BRANCH_NAME == 'release'){
+                echo "We are in release branch !"
+                input "proceed with deployment to live ?"
+              }
+            }
+
           }
         }
+
+        stage('') {
+          steps {
+            sleep 120
+            script {
+              if(env.BRANCH_NAME != 'master'){
+                bat 'docker-compose down'
+              }
+            }
+
+          }
+        }
+
       }
     }
+
   }
 }
-
-

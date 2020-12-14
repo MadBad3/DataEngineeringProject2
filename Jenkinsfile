@@ -1,7 +1,7 @@
 pipeline {
   agent any
   stages {
-    stage('Build and Running Flask app') {
+    stage('Building, Running, Testing Flask app') {
       parallel {
         stage('Build and Running Flask app') {
           steps {
@@ -30,7 +30,7 @@ pipeline {
           }
         }
 
-        stage('error') {
+        stage('Docker images down') {
           steps {
             sleep 120
             script {
@@ -42,12 +42,6 @@ pipeline {
           }
         }
 
-      }
-    }
-
-    stage('End') {
-      steps {
-        echo 'End of process'
       }
     }
 

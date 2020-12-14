@@ -1,14 +1,9 @@
 pipeline{
   agent any
   stages {
-    stage('Build Flask app'){
+    stage('Build and Running Flask app'){
       steps{
-        bat 'docker build -t myflaskapp .'
-      }
-    }
-    stage('Run Flask App'){
-      steps{
-        bat 'docker run -d -p 5000:5000 --name myflaskapp_c myflaskapp'
+        bat 'docker-compose up'
       }
     }
     stage('Testing'){

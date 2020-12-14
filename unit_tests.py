@@ -11,7 +11,7 @@ class FlaskTests(unittest.TestCase):
 		pass
 
 	def test_a_index(self):
-		response = requests.get('http://localhost:5000')
+		response = requests.get('http://127.0.0.1:5000')
 		self.assertEqual(response.status_code, 200)
 
 	def test_b_index(self):	
@@ -19,7 +19,7 @@ class FlaskTests(unittest.TestCase):
 			'word': 'Bad Hillary!',
 			'form_type': "search_tweets"
 		}
-		response = requests.post('http://localhost:5000', data=params)
+		response = requests.post('http://127.0.0.1:5000', data=params)
 		self.assertEqual(response.status_code, 200)
 
 if __name__ == '__main__':

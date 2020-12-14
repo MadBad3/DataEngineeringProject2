@@ -1,1 +1,6 @@
 flask
+pandas
+gensim
+unidecode
+nltk
+json2html

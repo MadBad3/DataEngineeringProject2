@@ -11,7 +11,7 @@ pipeline {
 
         stage('Testing') {
           steps {
-            sleep 120
+            sleep 90
             script {
               if(env.BRANCH_NAME != 'master' && env.BRANCH_NAME != 'release' && env.BRANCH_NAME != 'develop'){
                 echo "We are in feature branch, will run unit tests !"
@@ -32,7 +32,7 @@ pipeline {
 
         stage('Docker images down') {
           steps {
-            sleep 120
+            sleep 150
             script {
               if(env.BRANCH_NAME != 'master'){
                 bat 'docker-compose down'

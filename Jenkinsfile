@@ -30,7 +30,7 @@ pipeline {
           }
         }
 
-        stage('') {
+        stage('error') {
           steps {
             sleep 120
             script {
@@ -42,6 +42,12 @@ pipeline {
           }
         }
 
+      }
+    }
+
+    stage('End') {
+      steps {
+        echo 'End of process'
       }
     }
 

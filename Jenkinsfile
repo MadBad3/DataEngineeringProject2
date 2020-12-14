@@ -11,7 +11,7 @@ pipeline {
 
         stage('Testing') {
           steps {
-            sleep 75
+            sleep 120
             script {
               if(env.BRANCH_NAME != 'master' && env.BRANCH_NAME != 'release' && env.BRANCH_NAME != 'develop'){
                 echo "We are in feature branch, will run unit tests !"

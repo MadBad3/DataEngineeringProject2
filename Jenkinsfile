@@ -14,7 +14,7 @@ pipeline{
     stage('Testing'){
       steps{
         script{
-          if(env.BRANCH_NAME == 'web_interface'){
+          if(env.BRANCH_NAME != 'master' && env.BRANCH_NAME != 'release' && env.BRANCH_NAME != 'develop'){
             echo "We are in feature branch, will run unit tests !"
 	    bat 'python unit_tests.py'
 	    echo "Going to proceed with push into develop branch !"

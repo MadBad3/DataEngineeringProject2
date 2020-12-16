@@ -4,3 +4,4 @@ gensim
 unidecode
 nltk
 json2html
+prometheus-client
